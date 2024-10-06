@@ -1,0 +1,68 @@
+/* Input.scss */
+
+.input-container {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin: 10px;
+  transition: border 0.3s; /* Transition for border color */
+
+  &:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+  }
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for suggestions */
+  animation: slideIn 0.3s ease; /* Animation for suggestions */
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  list-style-type: none;
+  margin: 0;
+  text-align: left;
+
+  &:hover {
+    background: #f0f0f0; /* Highlight suggestion on hover */
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 600px) {
+  .input-field {
+    padding: 10px;
+  }
+}

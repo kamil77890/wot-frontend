@@ -64,7 +64,7 @@ export const getColorClass = (value, type) => {
     if (value < 2900) return "text-light-purple"; // Unique
     return "text-purple"; // Super Unique
   }
-  return ""; 
+  return "";
 };
 
 export const sendDataToBackend = async (phoneNum, nick) => {

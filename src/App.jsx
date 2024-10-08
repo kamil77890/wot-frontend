@@ -26,6 +26,14 @@ const App = () => {
           }
         />
         <Route path="/Phone" element={<PhoneConnection nick={nick} />} />
+        <Route
+          path="/gówno"
+          element={
+            <div>
+              <h2>gówno</h2>
+            </div>
+          }
+        />
       </Routes>
     </Router>
   );

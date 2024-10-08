@@ -1,19 +1,21 @@
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ThemeProvider } from "./ThemeContext";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Updated
-import PhoneConection from "./components/PhoneConection";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
+import PhoneConnection from "./components/PhoneConection";
 import "./index.css";
 
 const root = createRoot(document.getElementById("root"));
 
-root.render(
-  <ThemeProvider>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/Phone" element={<PhoneConection />} />
-      </Routes>
-    </Router>
-  </ThemeProvider>
-);
+function MainApp() {
+  const [nick, setNick] = useState("");
+
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+}
+
+root.render(<MainApp />);

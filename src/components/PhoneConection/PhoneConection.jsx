@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { sendDataToBackend } from "../../utils";
 import "./PhoneConection.scss";
 import { PiArrowElbowLeftFill } from "react-icons/pi";
 
-function PhoneConnection() {
+function PhoneConection({ nick }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
 
@@ -22,15 +23,19 @@ function PhoneConnection() {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const phoneRegex = /^\d{3}-\d{3}-\d{3}$/;
 
     if (phoneRegex.test(phoneNumber)) {
-      console.log("Numer telefonu:", phoneNumber);
+      try {
+        await sendDataToBackend(phoneNumber, nick);
+        setError("Number successfully added to the server!");
+      } catch {
+        setError("Error sending data to server.");
+      }
     } else {
-      setError("Proszę wprowadzić prawidłowy numer telefonu (XXX-XXX-XXX).");
+      setError("Please enter a valid phone number (XXX-XXX-XXX).");
     }
   };
 
@@ -42,16 +47,18 @@ function PhoneConnection() {
         </Link>
       </div>
 
-      <h2>Połączenie z telefonem</h2>
+      <h2>Phone Connection</h2>
       <p>
-        Wprowadź swój numer telefonu, aby otrzymywać powiadomienia o postępach w
-        grze World of Tanks.
+        Enter your phone number to receive notifications about your World of
+        Tanks progress.
       </p>
+
+      {nick && <p>Current player: {nick}</p>}
 
       <form onSubmit={handleSubmit}>
         <input
           type="tel"
-          placeholder="Wprowadź numer telefonu (XXX-XXX-XXX)"
+          placeholder="Enter phone number (XXX-XXX-XXX)"
           value={phoneNumber}
           onChange={handleInputChange}
           required
@@ -60,20 +67,20 @@ function PhoneConnection() {
         />
         {error && <p className="error-message">{error}</p>}
         <button type="submit" className="submit-button">
-          Zatwierdź
+          Submit
         </button>
       </form>
 
       <div className="notification-guide">
-        <h3>Jak otrzymywać powiadomienia:</h3>
+        <h3>How to receive notifications:</h3>
         <ol>
           <li>
-            Na telefonie pobierz aplikację <strong>Pushover</strong>.
+            Download the <strong>Pushover</strong> app on your phone.
           </li>
-          <li>Wprowadź swój numer telefonu w polu powyżej.</li>
+          <li>Enter your phone number in the field above.</li>
           <li>
-            Po zatwierdzeniu, będziesz otrzymywać powiadomienia o aktywności
-            oraz postępach w grze!
+            After submission, you'll receive notifications about your game
+            activity!
           </li>
         </ol>
       </div>
@@ -81,4 +88,4 @@ function PhoneConnection() {
   );
 }
 
-export default PhoneConnection;
+export default PhoneConection;

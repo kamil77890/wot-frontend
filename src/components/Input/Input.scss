@@ -30,14 +30,16 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   z-index: 1000;
-  max-height: 200px;
+  max-height: 250px;
+  max-width: 300px;
   overflow-y: auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for suggestions */
   animation: slideIn 0.3s ease; /* Animation for suggestions */
 }
 
 .suggestion-item {
-  padding: 10px;
+  width: 80%;
+  padding: 5px;
   cursor: pointer;
   transition: background 0.3s;
   list-style-type: none;

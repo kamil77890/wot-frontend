@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useTheme } from "../../ThemeContext";
 import { Link } from "react-router-dom";
 
-function Settings() {
+function Settings({ nick }) {
   const [open, setOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useTheme();
 

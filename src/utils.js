@@ -1,12 +1,25 @@
 import axios from "axios";
 
-export const get_personal_data = (account_id) => {
-  const res = axios
-    .get(
+export const get_personal_data = async (account_id) => {
+  try {
+    const response = await axios.get(
       `https://api.worldoftanks.eu/wot/account/info/?application_id=1ab4f4759f389a4dcf06ebee1d24d379&account_id=${account_id}`
-    )
-    .then((data) => console.log(data.data));
-  return res.data.data;
+    );
+    return response.data.data; // Return data directly
+  } catch (error) {
+    console.error("Error fetching personal data:", error);
+    throw error;
+  }
+};
+
+export const get_nick = (nick = NaN) => {
+  const nickanames = [];
+  nickanames.push(nick);
+  return nickanames.length > 0 ? nickanames[nickanames.length - 1] : null;
+};
+
+export const get_actual_nick = () => {
+  return get_nick();
 };
 
 export const Stats = async (nick) => {
@@ -51,5 +64,19 @@ export const getColorClass = (value, type) => {
     if (value < 2900) return "text-light-purple"; // Unique
     return "text-purple"; // Super Unique
   }
-  return ""; // Default case if type is unrecognized
+  return ""; 
+};
+
+export const sendDataToBackend = async (phoneNum, nick) => {
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:5000/cats?nick=${nick}&phone=${phoneNum}`
+    );
+
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error sending data to backend:", error);
+    throw error;
+  }
 };

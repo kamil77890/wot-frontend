@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
-import "./Input.scss";
 import axios from "axios";
+import "./Input.scss";
 
 const api = "1ab4f4759f389a4dcf06ebee1d24d379";
 
@@ -47,7 +47,6 @@ const Input = React.memo(({ onNickChange }) => {
         placeholder="Enter player name"
         className="input-field"
       />
-
       {suggestions.length > 0 && (
         <ul className="suggestions-list">
           {suggestions.map((suggestion) => (
@@ -56,7 +55,7 @@ const Input = React.memo(({ onNickChange }) => {
               onClick={() => handleSuggestionClick(suggestion)}
               className="suggestion-item"
             >
-              {suggestion.nickname}
+              <p className="ubuntu-light">{suggestion.nickname}</p>
             </li>
           ))}
         </ul>

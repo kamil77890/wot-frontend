@@ -15,7 +15,7 @@ const WinrateVsWN8Chart = ({ data }) => {
   return (
     <div className="chart-container">
       <h2>Winrate vs WN8</h2>
-      <LineChart width={600} height={300} data={data}>
+      <LineChart width={700} height={300} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="wn8" />
         <YAxis />

@@ -17,13 +17,13 @@ const WinrateVsWN8Chart = ({ data }) => {
       <h2>Winrate vs WN8</h2>
       <LineChart width={700} height={300} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="wn8" />
+        <XAxis dataKey="battles" />
         <YAxis />
         <Tooltip />
         <Legend />
         <Line
           type="monotone"
-          dataKey="winrate"
+          dataKey="wn8"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
         />

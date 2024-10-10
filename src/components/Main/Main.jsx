@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Main.scss";
-import { Stats, getColorClass } from "../../utils";
+import { Stats, getColorClass, is_phone, sendMessage } from "../../utils";
 import WinrateVsWN8Chart from "./WinrateVsWN8Chart";
 
-const Main = React.memo(({ nick }) => {
+const Main = React.memo(({ nick, phoneNum }) => {
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -52,6 +52,14 @@ const Main = React.memo(({ nick }) => {
       return null;
     }
     return winrateValue;
+  };
+
+  const getRawBattles = (battles) => {
+    const battlesValue = parseInt(battles);
+    if (isNaN(battlesValue) || battlesValue < 0) {
+      return null;
+    }
+    return battlesValue;
   };
 
   const formatWinrate = (winrateValue) => {
@@ -108,18 +116,18 @@ const Main = React.memo(({ nick }) => {
 
   const chartData = [
     {
-      wn8: stats["24"] ? validateWN(stats["24"].wn8) : null,
-      winrate: stats["24"] ? getRawWinrate(stats["24"].winrate) : null,
+      wn8: stats["30d"] ? validateWN(stats["30d"].wn8) : null,
+      battles: stats["30d"] ? getRawBattles(stats["30d"].battles) : null,
     },
     {
       wn8: stats["7d"] ? validateWN(stats["7d"].wn8) : null,
-      winrate: stats["7d"] ? getRawWinrate(stats["7d"].winrate) : null,
+      battles: stats["7d"] ? getRawBattles(stats["7d"].battles) : null,
     },
     {
-      wn8: stats["30d"] ? validateWN(stats["30d"].wn8) : null,
-      winrate: stats["30d"] ? getRawWinrate(stats["30d"].winrate) : null,
+      wn8: stats["24"] ? validateWN(stats["24"].wn8) : null,
+      battles: stats["24"] ? getRawBattles(stats["24"].battles) : null,
     },
-  ].filter((item) => item.wn8 !== null && item.winrate !== null);
+  ].filter((item) => item.wn8 !== null && item.battles !== null);
 
   return (
     <div className="main-container">
@@ -140,6 +148,17 @@ const Main = React.memo(({ nick }) => {
           {renderStatRow("30d", stats["30d"])}
         </tbody>
       </table>
+
+      <div className="phone_connected">
+        {phoneNum && (
+          <div>
+            <button onClick={() => sendMessage(phoneNum, nick)}>
+              Send a message!
+            </button>
+          </div>
+        )}
+      </div>
+
       <WinrateVsWN8Chart data={chartData} />
     </div>
   );

@@ -56,12 +56,12 @@
 }
 
 .text-green {
-  background-color: #5cb85c;
+  background-color: #4cae4c;
   color: #fff;
 }
 
 .text-dark-green {
-  background-color: #4cae4c;
+  background-color: #267426;
   color: #fff;
 }
 
@@ -71,12 +71,12 @@
 }
 
 .text-light-purple {
-  background-color: #c7b8ea;
+  background-color: #b03eca;
   color: #fff;
 }
 
 .text-purple {
-  background-color: #800080;
+  background-color: #ee0bee;
   color: #fff;
 }
 
@@ -86,12 +86,44 @@
     font-size: 0.9rem;
   }
 }
+.phone_connected {
+  margin-top: 30px; /* Adds space between the stats table and phone-connected section */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #4cae4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #267426;
+    }
+
+    &:active {
+      background-color: #1b521b;
+    }
+  }
+
+  p {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #333;
+  }
+}
 
 .chart-container {
-  margin-top: 30px; /* Space between the table and chart */
-  text-align: center; /* Center text */
+  margin-top: 30px;
+  text-align: center;
 }
 
 .chart-container h2 {
-  margin-bottom: 20px; /* Space below the title */
+  margin-bottom: 20px;
 }

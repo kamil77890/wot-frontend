@@ -5,11 +5,15 @@ export const get_personal_data = async (account_id) => {
     const response = await axios.get(
       `https://api.worldoftanks.eu/wot/account/info/?application_id=1ab4f4759f389a4dcf06ebee1d24d379&account_id=${account_id}`
     );
-    return response.data.data; // Return data directly
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching personal data:", error);
     throw error;
   }
+};
+
+export const is_phone = (phoneNum = false) => {
+  return phoneNum;
 };
 
 export const get_nick = (nick = NaN) => {
@@ -25,10 +29,10 @@ export const get_actual_nick = () => {
 export const Stats = async (nick) => {
   try {
     const response = await axios.get(`http://127.0.0.1:5000/cats?nick=${nick}`);
-    return response.data; // Return the data object directly
+    return response.data;
   } catch (error) {
     console.error("Error fetching stats:", error);
-    throw error; // Handle error appropriately
+    throw error;
   }
 };
 
@@ -79,4 +83,11 @@ export const sendDataToBackend = async (phoneNum, nick) => {
     console.error("Error sending data to backend:", error);
     throw error;
   }
+};
+
+export const sendMessage = async (phoneNum, nick) => {
+  const response = await axios.get(
+    `http://localhost:5000/phone?nick=${nick}&phone=${phoneNum}`
+  );
+  return response.data;
 };

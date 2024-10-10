@@ -4,7 +4,7 @@ import { sendDataToBackend } from "../../utils";
 import "./PhoneConection.scss";
 import { PiArrowElbowLeftFill } from "react-icons/pi";
 
-function PhoneConection({ nick }) {
+function PhoneConnection({ nick, onPhoneNumChange }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [error, setError] = useState("");
 
@@ -30,6 +30,7 @@ function PhoneConection({ nick }) {
     if (phoneRegex.test(phoneNumber)) {
       try {
         await sendDataToBackend(phoneNumber, nick);
+        onPhoneNumChange(phoneNumber);
         setError("Number successfully added to the server!");
       } catch {
         setError("Error sending data to server.");
@@ -88,4 +89,4 @@ function PhoneConection({ nick }) {
   );
 }
 
-export default PhoneConection;
+export default PhoneConnection;

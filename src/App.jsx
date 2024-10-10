@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from "react";
 import Input from "./components/Input";
 import Main from "./components/Main";
-import Settings from "./components/Settings";
+import Settings from "./components/settings";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PhoneConnection from "./components/PhoneConection";
 
 const App = () => {
   const [nick, setNick] = useState("");
-  const [phoneNum, setPhoneNum] = useState(""); // Add phoneNum state
+  const [phoneNum, setPhoneNum] = useState("");
 
   const handleNickChange = useCallback((selectedNick) => {
     setNick(selectedNick);

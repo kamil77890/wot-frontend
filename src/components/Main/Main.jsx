@@ -159,7 +159,7 @@ const Main = React.memo(({ nick, phoneNum }) => {
         )}
       </div>
 
-      <WinrateVsWN8Chart data={chartData} />
+      <WinrateVsWN8Chart nick={nick} />
     </div>
   );
 });

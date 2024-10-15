@@ -12,6 +12,41 @@ export const get_personal_data = async (account_id) => {
   }
 };
 
+export const get_account_id = async (nick) => {
+  try {
+    const response = await axios.get(
+      `https://api.worldoftanks.eu/wot/account/list/?application_id=1ab4f4759f389a4dcf06ebee1d24d379&search=${nick}`
+    );
+    return response.data.data[0].account_id;
+  } catch (error) {
+    console.error("Error fetching account_id:", error);
+    throw error;
+  }
+};
+
+export const get_battles = async (account_id) => {
+  try {
+    const response = await axios.get(
+      `https://api.worldoftanks.eu/wot/account/info/?application_id=1ab4f4759f389a4dcf06ebee1d24d379&account_id=${account_id}`
+    );
+
+    // Uzyskanie danych pod kluczem z account_id
+    const accountData = response.data.data[account_id];
+
+    // Sprawdzenie czy accountData istnieje
+    if (accountData && accountData.statistics && accountData.statistics.all) {
+      const battles = accountData.statistics.all.battles;
+      console.log(`Liczba bitew: ${battles}`);
+      return battles;
+    } else {
+      throw new Error("Brak statystyk dla podanego konta.");
+    }
+  } catch (error) {
+    console.error("Error fetching battles:", error);
+    throw error;
+  }
+};
+
 export const is_phone = (phoneNum = false) => {
   return phoneNum;
 };
